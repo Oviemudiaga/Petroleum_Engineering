@@ -26,10 +26,12 @@ class Logger():
             self.count = self.count -1
         print(self.axes)
         # Set up the plot axes
+        count = 0
         for self.ax in self.axes:
-            for self.ax_no in range(len(self.axes)):
-                self.dict[self.ax] = (plt.subplot2grid((1, 4), (0, self.ax_no), rowspan=1, colspan=1))
-        print(self.dict.items(), self.dict.values(), self.dict.keys())
+            print(count)
+            self.dict[self.ax] = plt.subplot2grid((1, 3), (0, count), rowspan=1, colspan=1)
+            count += 1
+        print(self.dict.items())
 
     def plot_gr(self):
         self.plot_axis()
@@ -47,17 +49,27 @@ class Logger():
 
     def plot_gr_res(self):
         self.plot_axis()
+        (ax,ay) = (list(self.dict.values())[0],list(self.dict.values())[1])
+        # GR track
+        ax.plot(self.base_log_frame["GR"], self.base_log_frame.index, color="green", linewidth=0.5)
+        ax.set_xlabel("Gamma: GB_6")
+        ax.xaxis.label.set_color("green")
+        ax.set_xlim(0, 200)
+        ax.set_ylabel("Depth (ft)")
+        ax.tick_params(axis='x', colors="green")
+        ax.spines["top"].set_edgecolor("green")
+        ax.title.set_color('green')
+        # ax.set_xticks([0, 50, 100, 150, 200])
         # Resistivity track
-        for ax in list(self.dict.values()):
-            ax.plot(self.base_log_frame["P40H"], self.base_log_frame.index, color="red", linewidth=0.5)
-            ax.set_xlabel("Resistivity - Deep")
-            ax.set_xlim(0.2, 2000)
-            ax.xaxis.label.set_color("red")
-            # ax2.spines["top"].set_position(("axes", 1.08))
-            ax.tick_params(axis='x', colors="red")
-            ax.spines["top"].set_edgecolor("red")
-            #ax.set_xticks([0.1, 1, 10, 100, 1000])
-            ax.semilogx()
+        ay.plot(self.base_log_frame["P40H"], self.base_log_frame.index, color="red", linewidth=0.5)
+        ay.set_xlabel("Resistivity - Deep")
+        ay.set_xlim(0.2, 2000)
+        ay.xaxis.label.set_color("red")
+        # ax2.spines["top"].set_position(("axes", 1.08))
+        ay.tick_params(axis='x', colors="red")
+        ay.spines["top"].set_edgecolor("red")
+        #ax.set_xticks([0.1, 1, 10, 100, 1000])
+        ay.semilogx()
         self.fig.savefig('test1')
 
 
