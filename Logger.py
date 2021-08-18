@@ -3,9 +3,11 @@ import matplotlib.pyplot as plt
 import lasio
 
 class Logger():
-    def __init__(self,well_name, figures):
+    def __init__(self,well_name, figures, top_depth, bottom_depth):
         self.well_name = well_name
         self.figures = figures
+        self.top_depth = top_depth
+        self.bottom_depth = bottom_depth
         self.get_data()
         self.axes = [] #to store the number of plot axis that will be print out
         self.fig, self.ax = plt.subplots(figsize=(15, 10))
@@ -24,14 +26,11 @@ class Logger():
             self.axes.append('ax{}'.format(list[-1]))
             list.append(self.count-1)
             self.count = self.count -1
-        print(self.axes)
         # Set up the plot axes
         count = 0
         for self.ax in self.axes:
-            print(count)
             self.dict[self.ax] = plt.subplot2grid((1, 3), (0, count), rowspan=1, colspan=1)
             count += 1
-        print(self.dict.items())
 
     def plot_gr(self):
         self.plot_axis()
@@ -71,13 +70,12 @@ class Logger():
         #ax.set_xticks([0.1, 1, 10, 100, 1000])
         ay.semilogx()
         for i in (ax,ay):
-            i.set_ylim(9900, 9500)  # Change depth interval
+            i.set_ylim(self.bottom_depth, self.top_depth)  # Change depth interval
             i.grid(which='major', color='lightgrey', linestyle='-')
             i.xaxis.set_ticks_position("top")
             i.xaxis.set_label_position("top")
         self.fig.savefig('test1')
 
-test = Logger('Gbet_6',figures=2)
-#print(test.plot_axis(count=1))
+test = Logger('Gbet_6',figures=2, top_depth=9900, bottom_depth=9000)
 #print(test.plot_gr())
 print(test.plot_gr_res())
