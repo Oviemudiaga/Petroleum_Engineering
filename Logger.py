@@ -70,12 +70,12 @@ Elcrest_Gbetiokun-6_LWD_12.25in_3450ft-10337ft_RT_Interpolated.las') #read the f
         #ax.set_xticks([0.1, 1, 10, 100, 1000])
         ay.semilogx()
         for i in (ax,ay):
-            i.set_ylim(self.top_depth, self.bottom_depth)  # Change depth interval
+            i.set_ylim(self.bottom_depth, self.top_depth)  # Change depth interval
             i.grid(which='major', color='lightgrey', linestyle='-')
             i.xaxis.set_ticks_position("top")
             i.xaxis.set_label_position("top")
         self.fig.savefig('test1')
 
-test = Logger('Gbetiokun_6',figures=2, top_depth=9900, bottom_depth=9000)
+test = Logger('Gbetiokun_6',figures=2, bottom_depth=9900, top_depth=9000)
 #print(test.plot_gr())
 print(test.plot_gr_res())
