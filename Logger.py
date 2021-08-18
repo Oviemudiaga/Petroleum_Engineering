@@ -14,8 +14,7 @@ class Logger():
         self.dict = {}
 
     def get_data(self):
-        base_log = lasio.read('/Users/mudi/OneDrive/Codes/RE_WorkFold/Elcrest_Gbetiokun-6_LWD_Data @3490ft - 10337ft/\
-Elcrest_Gbetiokun-6_LWD_12.25in_3450ft-10337ft_RT_Interpolated.las') #read the file into base_log
+        base_log = lasio.read('FILE.las') #read the file into base_log
         self.base_log = base_log #call is self.base_log so it can be manipulated
         self.base_log_frame = self.base_log.df() #create dataframe
 
