@@ -74,8 +74,8 @@ Elcrest_Gbetiokun-6_LWD_12.25in_3450ft-10337ft_RT_Interpolated.las') #read the f
             i.grid(which='major', color='lightgrey', linestyle='-')
             i.xaxis.set_ticks_position("top")
             i.xaxis.set_label_position("top")
-        self.fig.savefig('test1')
+        self.fig.savefig('Well_A')
 
-test = Logger('Gbetiokun_6',figures=2, bottom_depth=9900, top_depth=9000)
+test = Logger('Well_A',figures=2, bottom_depth=9700, top_depth=9000)
 #print(test.plot_gr())
 print(test.plot_gr_res())
