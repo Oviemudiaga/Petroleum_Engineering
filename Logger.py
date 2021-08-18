@@ -70,8 +70,12 @@ class Logger():
         ay.spines["top"].set_edgecolor("red")
         #ax.set_xticks([0.1, 1, 10, 100, 1000])
         ay.semilogx()
+        for i in (ax,ay):
+            i.set_ylim(9900, 9500)  # Change depth interval
+            i.grid(which='major', color='lightgrey', linestyle='-')
+            i.xaxis.set_ticks_position("top")
+            i.xaxis.set_label_position("top")
         self.fig.savefig('test1')
-
 
 test = Logger('Gbet_6',figures=2)
 #print(test.plot_axis(count=1))
