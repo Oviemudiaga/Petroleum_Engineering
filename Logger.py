@@ -14,8 +14,8 @@ class Logger():
         self.dict = {}
 
     def get_data(self):
-        base_log = lasio.read('/Users/mudi/OneDrive/Codes/RE_WorkFold/Elcrest_Gbetiokun-6_LWD_Data \
-@3490ft - 10337ft/Elcrest_Gbetiokun-6_LWD_12.25in_3450ft-10337ft_RT_Non_Interpolated.las') #read the file into base_log
+        base_log = lasio.read('/Users/mudi/OneDrive/Codes/RE_WorkFold/Elcrest_Gbetiokun-6_LWD_Data @3490ft - 10337ft/\
+Elcrest_Gbetiokun-6_LWD_12.25in_3450ft-10337ft_RT_Interpolated.las') #read the file into base_log
         self.base_log = base_log #call is self.base_log so it can be manipulated
         self.base_log_frame = self.base_log.df() #create dataframe
 
@@ -36,7 +36,7 @@ class Logger():
         self.plot_axis()
         for ax in list(self.dict.values()):
             ax.plot(self.base_log_frame["GR"], self.base_log_frame.index, color="green", linewidth=0.5)
-            ax.set_xlabel("Gamma: GB_6")
+            ax.set_xlabel(self.well_name)
             ax.xaxis.label.set_color("green")
             ax.set_xlim(0, 200)
             ax.set_ylabel("Depth (ft)")
@@ -51,7 +51,7 @@ class Logger():
         (ax,ay) = (list(self.dict.values())[0],list(self.dict.values())[1])
         # GR track
         ax.plot(self.base_log_frame["GR"], self.base_log_frame.index, color="green", linewidth=0.5)
-        ax.set_xlabel("Gamma: GB_6")
+        ax.set_xlabel("Gamma: {}".format(self.well_name))
         ax.xaxis.label.set_color("green")
         ax.set_xlim(0, 200)
         ax.set_ylabel("Depth (ft)")
@@ -70,12 +70,12 @@ class Logger():
         #ax.set_xticks([0.1, 1, 10, 100, 1000])
         ay.semilogx()
         for i in (ax,ay):
-            i.set_ylim(self.bottom_depth, self.top_depth)  # Change depth interval
+            i.set_ylim(self.top_depth, self.bottom_depth)  # Change depth interval
             i.grid(which='major', color='lightgrey', linestyle='-')
             i.xaxis.set_ticks_position("top")
             i.xaxis.set_label_position("top")
         self.fig.savefig('test1')
 
-test = Logger('Gbet_6',figures=2, top_depth=9900, bottom_depth=9000)
+test = Logger('Gbetiokun_6',figures=2, top_depth=9900, bottom_depth=9000)
 #print(test.plot_gr())
 print(test.plot_gr_res())
